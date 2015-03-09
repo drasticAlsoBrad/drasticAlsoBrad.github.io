@@ -6,6 +6,10 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+
+    //need to set starting location
+
+    //need to set speed
 }
 
 // Update the enemy's position, required method for game
@@ -14,6 +18,10 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+
+    //Update enemy location
+
+    //Handle collision with player
 }
 
 // Draw the enemy on the screen, required method for game
@@ -25,7 +33,9 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function(){
-    this.sprite = 'images/char-boy'
+    this.sprite = 'images/char-boy.png'
+
+    //set player initial location
 }
 
 // Player update function
@@ -40,7 +50,11 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-// Player handleInput
+// Player handleInput. Recieves input from allowkeys to actually move the player.
+// Must also check to make sure player cannot move off of screen.
+
+
+// Player reset method. Resets teh level when player reaches the targeted location.
 
 
 // Now instantiate your objects.
