@@ -8,8 +8,10 @@ var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
 
     //need to set starting location
-
+    this.x = 
+    this.y = 
     //need to set speed
+    this.speed = 25;
 }
 
 // Update the enemy's position, required method for game
@@ -20,7 +22,7 @@ Enemy.prototype.update = function(dt) {
     // all computers.
 
     //Update enemy location
-
+      this.x += this.speed *dt;
     //Handle collision with player
 }
 
@@ -33,7 +35,7 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function(){
-    this.sprite = 'images/char-boy.png'
+    this.sprite = 'images/char-boy.png';
 
     //set player initial location
 }
