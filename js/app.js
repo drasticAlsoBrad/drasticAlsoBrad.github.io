@@ -1,3 +1,6 @@
+// Global variables
+var gameStatus = 0;
+
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -8,11 +11,15 @@ var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
 
     //need to set starting location
-    this.x = 
-    this.y = 
+    this.x = 0;
+    this.y = 0;
     //need to set speed
     this.speed = 25;
 }
+
+function randomLane(){
+
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -22,8 +29,14 @@ Enemy.prototype.update = function(dt) {
     // all computers.
 
     //Update enemy location
-      this.x += this.speed *dt;
+    this.x += this.speed * dt;
     //Handle collision with player
+    if (this.x = Player.x){
+      //reset game
+    }
+    else{
+      do nothing;
+    }
 }
 
 // Draw the enemy on the screen, required method for game
@@ -38,6 +51,8 @@ var Player = function(){
     this.sprite = 'images/char-boy.png';
 
     //set player initial location
+    this.x = canvas.width / canvas.width;
+    this.y = 0;
 }
 
 // Player update function
