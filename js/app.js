@@ -31,12 +31,13 @@ Enemy.prototype.update = function(dt) {
     //Update enemy location
     this.x += this.speed * dt;
     //Handle collision with player
-    if (this.x = Player.x){
-      //reset game
-    }
-    else{
-      do nothing;
-    }
+    //if (this.x = Player.x){
+      // lose life point. if life point > 0 then reset at starting position.
+      // if < 1 game over
+    //}
+    //else{
+    //  do nothing;
+    //}
 }
 
 // Draw the enemy on the screen, required method for game
@@ -51,8 +52,8 @@ var Player = function(){
     this.sprite = 'images/char-boy.png';
 
     //set player initial location
-    this.x = canvas.width / canvas.width;
-    this.y = 0;
+    this.x = 202;
+    this.y = 422;
 }
 
 // Player update function
@@ -68,7 +69,7 @@ Player.prototype.render = function() {
 }
 
 // Player handleInput. Recieves input from allowkeys to actually move the player.
-// Must also check to make sure player cannot move off of screen.
+// Must also check to make sure player cannot move off of screen. If x < 0 don't allow. if y > 606 don't allow.
 
 
 // Player reset method. Resets teh level when player reaches the targeted location.
@@ -77,7 +78,10 @@ Player.prototype.render = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+var allEnemies = [];
 
+
+var player = new Player();
 
 
 // This listens for key presses and sends the keys to your
