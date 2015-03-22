@@ -24,20 +24,8 @@ function randomLane(){
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-
     //Update enemy location
-    this.x += this.speed * dt;
-    //Handle collision with player
-    //if (this.x = Player.x){
-      // lose life point. if life point > 0 then reset at starting position.
-      // if < 1 game over
-    //}
-    //else{
-    //  do nothing;
-    //}
+    this.x += this.speed * dt;    
 }
 
 // Draw the enemy on the screen, required method for game
@@ -52,7 +40,7 @@ var Player = function(){
     this.sprite = 'images/char-boy.png';
 
     //set player initial location
-    this.x = 202;
+    this.x = 202.5;
     this.y = 422;
 }
 
@@ -77,10 +65,9 @@ Player.prototype.render = function() {
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
 var allEnemies = [];
 
-
+// Place the player object in a variable called player
 var player = new Player();
 
 
