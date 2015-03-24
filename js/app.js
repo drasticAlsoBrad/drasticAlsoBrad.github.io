@@ -8,17 +8,31 @@ var Enemy = function() {
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
 
     //need to set starting location
-    this.x = 0;
-    this.y = 0;
+    this.x = randomXLane();
+    this.y = randomYLane();
     //need to set speed
-    this.speed = 25;
+    if (this.x < 100){
+      this.speed = 50;
+      this.sprite = 'images/enemy-bug.png';
+    }
+    else if (this.x > 100){
+      this.speed = -50;
+      this.sprite = 'images/enemy-bug-left.png';
+    }
 }
 
-function randomLane(){
+function randomXLane(){
+  var lanesX = [-45, 450]
+  var randLanesX = lanesX[Math.floor(Math.random() * lanesX.length)];
+  return randLanesX;
+};
 
+function randomYLane(){
+  var lanesY = [65, 148, 231]
+  var randLanesY = lanesY[Math.floor(Math.random() * lanesY.length)];
+  return randLanesY;
 };
 
 // Update the enemy's position, required method for game
@@ -41,7 +55,7 @@ var Player = function(){
 
     //set player initial location
     this.x = 202.5;
-    this.y = 422;
+    this.y = 405;
 }
 
 // Player update function
@@ -67,9 +81,40 @@ Player.prototype.render = function() {
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
 
+//Function to create a new enemy and add it to the all enmies array
+function createEnemy(){
+  //Place new enemy in a variable called enemy 
+  var enemy = new Enemy();
+  //Add new enemy to array
+  allEnemies.push(enemy);
+};
+
+// Set interval for enemies
+setInterval(function (){createEnemy()}, 2000);
+
 // Place the player object in a variable called player
 var player = new Player();
 
+Player.prototype.handleInput = function(key) {
+    if ("up" === key) {
+        if (this.y - 83 >= -15) {
+            this.y -= 83;
+            this.direction = 0;
+        }
+    } else if ("down" === key) {
+        if (this.y + 83 <= 425) {
+            this.y += 83;
+            this.direction = 1;
+        }
+    } else if ("right" === key) {
+        if (this.x + 101 <= 450) {
+            this.x += 101;
+        }
+    } else if ("left" === key) 
+        if (this.x - 101 >= -2){ 
+            this.x -= 101;
+        }
+};
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
