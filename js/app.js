@@ -14,11 +14,11 @@ var Enemy = function() {
     this.y = randomYLane();
     //need to set speed
     if (this.x < 100){
-      this.speed = 50;
+      this.speed = randomSpeed();
       this.sprite = 'images/enemy-bug.png';
     }
     else if (this.x > 100){
-      this.speed = -50;
+      this.speed = randomSpeed() * -1;
       this.sprite = 'images/enemy-bug-left.png';
     }
 }
@@ -34,6 +34,12 @@ function randomYLane(){
   var randLanesY = lanesY[Math.floor(Math.random() * lanesY.length)];
   return randLanesY;
 };
+
+function randomSpeed(){
+  var speed = [25, 50, 75, 100]
+  var randSpeed = speed[Math.floor(Math.random() * speed.length)];
+  return randSpeed;
+}
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
