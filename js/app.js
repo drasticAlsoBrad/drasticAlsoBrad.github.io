@@ -59,7 +59,7 @@ Enemy.prototype.render = function() {
 var Player = function(){
     this.sprite = 'images/char-boy.png';
 
-    //set player initial location
+    // Set player initial location
     this.x = 202.5;
     this.y = 405;
 }
@@ -69,6 +69,8 @@ Player.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x * dt;
+    this.y * dt;
 }
 
 // Player Render
@@ -103,7 +105,7 @@ var player = new Player();
 
 Player.prototype.handleInput = function(key) {
     if ("up" === key) {
-        if (this.y - 83 >= -15) {
+        if (this.y - 83 >= -10) {
             this.y -= 83;
             this.direction = 0;
         }
@@ -117,7 +119,7 @@ Player.prototype.handleInput = function(key) {
             this.x += 101;
         }
     } else if ("left" === key) 
-        if (this.x - 101 >= -2){ 
+        if (this.x - 101 >= 0){ 
             this.x -= 101;
         }
 };
