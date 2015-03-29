@@ -67,6 +67,7 @@ Player.prototype.update = function(dt) {
   // Player update function
   this.x * dt;
   this.y * dt;
+  winCondition();
 }
 
 // Player Render
@@ -81,7 +82,11 @@ function reset(){
   allEnemies.length = 0;
 };
 
-
+function winCondition(){
+  if (player.y < 50){
+    setTimeout(function(){reset()}, 150);
+  }
+}
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
