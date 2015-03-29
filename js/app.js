@@ -54,7 +54,6 @@ function randomSpeed(){
 // Player object
 var Player = function(){
     this.sprite = 'images/char-boy.png';
-    var points = 0;
     // Set player initial location
     this.x = 202.5;
     this.y = 405;
@@ -142,8 +141,7 @@ document.addEventListener('keyup', function(e) {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down',
-        80: 'space'
+        40: 'down'
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
