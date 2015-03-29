@@ -82,11 +82,13 @@ function reset(){
   allEnemies.length = 0;
 };
 
+// This function resets the game when the player reaches the water.
 function winCondition(){
   if (player.y < 50){
     setTimeout(function(){reset()}, 150);
   }
-}
+};
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
