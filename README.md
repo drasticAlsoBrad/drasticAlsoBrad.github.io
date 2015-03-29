@@ -7,6 +7,7 @@ Instructions:
 		Simply click the download ZIP button located in the lower right hand corner. Once you have unzipped the file, double-click the index.html file. Your game should load into your default browser.
 
 		Alternatively, you can go to drasticAlsoBrad.github.io to play the game directly from the github repo.
+		
 	Movement -
 		<ul>
 		<li>Up Key - Move up</li>
