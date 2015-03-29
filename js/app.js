@@ -1,18 +1,13 @@
-// Global variables
-var gameStatus = 0;
-
 // Enemies our player must avoid
 var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-
-    //need to set starting location
+    // Assigns enemy object with a random lane using the randomX/YLane functions
     this.x = randomXLane();
     this.y = randomYLane();
-    //need to set speed
+    // Gives the enemy object a collision box to check for collisions
+    this.width = 50;
+    this.height = 50;
+    // Assigns random speed to enemy Object.
+    // Takes the starting X value and uses that to determine how the enemy should face.
     if (this.x < 100){
       this.speed = randomSpeed();
       this.sprite = 'images/enemy-bug.png';
@@ -23,25 +18,6 @@ var Enemy = function() {
     }
 }
 
-function randomXLane(){
-  var lanesX = [-45, 450]
-  var randLanesX = lanesX[Math.floor(Math.random() * lanesX.length)];
-  return randLanesX;
-};
-
-function randomYLane(){
-  var lanesY = [65, 148, 231]
-  var randLanesY = lanesY[Math.floor(Math.random() * lanesY.length)];
-  return randLanesY;
-};
-
-function randomSpeed(){
-  var speed = [25, 50, 75, 100]
-  var randSpeed = speed[Math.floor(Math.random() * speed.length)];
-  return randSpeed;
-}
-
-// Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     //Update enemy location
@@ -53,36 +29,58 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// This function assigns a random X starting location on the left and right bounds of the canvas.
+function randomXLane(){
+  var lanesX = [-45, 450]
+  var randLanesX = lanesX[Math.floor(Math.random() * lanesX.length)];
+  return randLanesX;
+};
+
+// This function assigns a random Y locations based on the three brick lanes for enemy use.
+function randomYLane(){
+  var lanesY = [65, 148, 231]
+  var randLanesY = lanesY[Math.floor(Math.random() * lanesY.length)];
+  return randLanesY;
+};
+
+//This function assigns a random speed based on a preset array.
+function randomSpeed(){
+  var speed = [25, 50, 75, 100]
+  var randSpeed = speed[Math.floor(Math.random() * speed.length)];
+  return randSpeed;
+}
+
+
+// Player object
 var Player = function(){
     this.sprite = 'images/char-boy.png';
-
+    var points = 0;
     // Set player initial location
     this.x = 202.5;
     this.y = 405;
+    // Gives the player object a collision box to check for collisions
+    this.width = 50;
+    this.height = 50;
 }
 
-// Player update function
+// Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-    this.x * dt;
-    this.y * dt;
+  // Player update function
+  this.x * dt;
+  this.y * dt;
 }
 
 // Player Render
 Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-// Player handleInput. Recieves input from allowkeys to actually move the player.
-// Must also check to make sure player cannot move off of screen. If x < 0 don't allow. if y > 606 don't allow.
-
-
-// Player reset method. Resets teh level when player reaches the targeted location.
+// Player reset method. Resets the level when player reaches the targeted location.
+function reset(){
+  player.x = 202.5;
+  player.y = 405;
+  allEnemies.length = 0;
+};
 
 
 // Now instantiate your objects.
@@ -100,9 +98,22 @@ function createEnemy(){
 // Set interval for enemies
 setInterval(function (){createEnemy()}, 2000);
 
+// Collision detection
+function checkCollisions(){
+  allEnemies.forEach(function(enemy){
+    if (player.x < enemy.x + enemy.width && player.x + player.width > enemy.x &&
+    player.y < enemy.y + enemy.height && player.height + player.y > enemy.y) {
+      console.log("collide!");
+    reset();
+      //lives = lives - 1;
+    }
+  });
+};
+
 // Place the player object in a variable called player
 var player = new Player();
 
+// Function that handles the direction and distance of movements while setting the map boundaries.
 Player.prototype.handleInput = function(key) {
     if ("up" === key) {
         if (this.y - 83 >= -10) {
@@ -131,7 +142,8 @@ document.addEventListener('keyup', function(e) {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down'
+        40: 'down',
+        80: 'space'
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
